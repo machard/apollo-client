@@ -629,7 +629,10 @@ export class QueryManager {
     // the promise for it will be rejected and its results will not be written to the
     // store.
     Object.keys(this.observableQueries).forEach((queryId) => {
-      if (! this.observableQueries[queryId].observableQuery.options.noFetch) {
+      if (
+        ! this.observableQueries[queryId].observableQuery.options.noFetch &&
+        this.observableQueries[queryId].observableQuery.observers.length
+      ) {
         this.observableQueries[queryId].observableQuery.refetch();
       }
     });
